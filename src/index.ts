@@ -9,7 +9,7 @@ export default worker;
 const SLACK_DATA_SOURCE_ID = requiredEnv("NOTION_DATA_SOURCE_ID");
 const SLACK_CUSTOM_EMOJI_ID = process.env.NOTION_CUSTOM_EMOJI_ID;
 
-const PS_STYLE_SYSTEM_PROMPT = `Write in Phil Simon's house style: active voice only, short direct sentences under 25 words, no jargon (say "use" not "utilize", "processes" not "workflows"), no filler phrases like "in terms of" or "going forward", no consecutive sentences with the same structure. Never begin a sentence with "What," "Who," "Where," or "Why" unless it's a question. Oxford comma always. Plain paragraphs, no bullet points unless the content is genuinely list-like.`;
+const SUMMARY_STYLE_PROMPT = `Write in active voice only, with short direct sentences under 25 words. Avoid jargon (say "use" not "utilize", "processes" not "workflows") and filler phrases like "in terms of" or "going forward". Don't write consecutive sentences with the same structure, and don't begin a sentence with "What," "Who," "Where," or "Why" unless it's a question. Use the Oxford comma. Write plain paragraphs, no bullet points unless the content is genuinely list-like.`;
 
 interface SlackMessage {
 	user?: string;
@@ -135,7 +135,7 @@ async function summarizeChannel(
 	const response = await client.messages.create({
 		model: "claude-opus-5",
 		max_tokens: 1024,
-		system: PS_STYLE_SYSTEM_PROMPT,
+		system: SUMMARY_STYLE_PROMPT,
 		messages: [
 			{
 				role: "user",
@@ -157,7 +157,7 @@ async function summarizeOverview(
 	const response = await client.messages.create({
 		model: "claude-opus-5",
 		max_tokens: 512,
-		system: PS_STYLE_SYSTEM_PROMPT,
+		system: SUMMARY_STYLE_PROMPT,
 		messages: [
 			{
 				role: "user",
@@ -182,7 +182,7 @@ function paragraphBlocks(text: string): Array<Record<string, unknown>> {
 worker.tool("summarizeSlackChannels", {
 	title: "Summarize Slack Channels",
 	description:
-		"Summarizes activity across all public Slack channels over the past N days and writes the result to the Slack Public Channel Summaries Notion database.",
+		"Summarizes activity across all public Slack channels over the past N days and writes the result to the configured Notion database.",
 	schema: j.object({
 		daysBack: j
 			.number()

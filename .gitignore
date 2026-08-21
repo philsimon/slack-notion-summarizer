@@ -6,3 +6,4 @@ node_modules/
 workers.*.json
 workers.json
 .DS_Store
+docs/*.png
