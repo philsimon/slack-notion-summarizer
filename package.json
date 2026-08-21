@@ -1,0 +1,26 @@
+{
+	"name": "slack-notion-summarizer",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "tsc",
+		"check": "tsc --noEmit",
+		"relay": "tsx src/relay.ts"
+	},
+	"engines": {
+		"node": ">=22.0.0",
+		"npm": ">=10.9.2"
+	},
+	"devDependencies": {
+		"@types/node": "^22.9.0",
+		"tsx": "^4.20.6",
+		"typescript": "^5.8.0"
+	},
+	"dependencies": {
+		"@anthropic-ai/sdk": "^0.120.0",
+		"@notionhq/workers": ">=0.0.0",
+		"@slack/bolt": "^5.0.0",
+		"dotenv": "^17.4.2"
+	}
+}
