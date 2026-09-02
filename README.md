@@ -21,7 +21,7 @@ A [Notion Worker](https://developers.notion.com/workers/get-started/overview) th
 
 ### 1. Create the target Notion database
 
-The worker writes to an existing database, it doesn't create one for you. In Notion, create a database with:
+The worker writes to an existing database. It doesn't create one for you. In Notion, create a database with:
 
 - A title property named **Date**.
 - Any other properties you want are fine, the worker only writes the title.
