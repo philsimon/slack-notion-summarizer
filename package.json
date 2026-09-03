@@ -22,5 +22,9 @@
 		"@notionhq/workers": ">=0.0.0",
 		"@slack/bolt": "^5.0.0",
 		"dotenv": "^17.4.2"
+	},
+	"overrides": {
+		"fast-uri": "^3.1.6",
+		"qs": "^6.16.0"
 	}
 }
